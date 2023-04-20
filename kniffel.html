@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<!-- Titel im Browser -->
+		<title>Kniffel - Praktikantenaufgabe</title>
+
+		<!-- Zeichenkodierung bestimmen -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+		<!-- Stylesheet und Javascript einbinden -->
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="script.js"></script>
+	</head>
+	<body>
+
+		<!-- Seitentitel-->
+		<h1>KNIFFEL</h1>
+
+	<!--Kleiner Würfel-->
+	<div class="containerzwei">
+		<button class="dice-two" onclick="toggleDice(this)"></button>
+		<button class="dice-two" onclick="toggleDice(this)"></button>
+		<button class="dice-two" onclick="toggleDice(this)"></button>
+		<button class="dice-two" onclick="toggleDice(this)"></button>
+		<button class="dice-two" onclick="toggleDice(this)"></button>
+	</div>
+
+	<!--Große Würfel-->
+	<div class="container">
+			<button class="dice" onclick="toggleDice(this)"></button>
+			<button class="dice" onclick="toggleDice(this)"></button>
+			<button class="dice" onclick="toggleDice(this)"></button>
+			<button class="dice" onclick="toggleDice(this)"></button>
+			<button class="dice" onclick="toggleDice(this)"></button>
+
+			<!-- Button zum Würfeln -->
+			<button id="roll" onclick="rollDices()">Würfeln</button>
+
+			<!-- Wertetabelle -->
+			<table>
+				<tbody>
+
+					<!-- Alle Einser zählen -->
+					<tr>
+						<th>EINSER</th>
+						<td onclick="assignDices(this, 1)"></td>
+					</tr>
+
+					<!-- Alle Zweier zählen -->
+					<tr>
+						<th>ZWEIER</th>
+						<td onclick="assignDices(this, 2)"></td>
+					</tr>
+
+					<!--Alle Dreier Zahlen-->
+					<tr>
+						<th>DREIER</th>
+						<td onclick="assignDices(this, 3)"></td>
+					</tr>
+
+					<!--Alle Vierer Zahlen-->
+					<tr>
+						<th>VIERER</th>
+						<td onclick="assignDices(this, 4)"></td>
+					</tr>
+
+					<!--Alle Fünfer Zahlen-->
+					<tr>
+						<th>FÜNFER</th>
+						<td onclick="assignDices(this, 5)"></td>
+					</tr>
+
+					<!--Alle Sechser Zahlen-->
+					<tr>
+						<th>SECHSER</th>
+						<td onclick="assignDices(this, 6)"></td>
+					</tr>
+
+					<!--Dreierpasch-->
+					<tr>
+						<th>DREIERPASCH</th>
+						<td onclick="assignDices(this, 'Dreierpasch')"></td>
+					</tr>
+
+					<!--Viererpasch-->
+					<tr>
+						<th>VIERERPASCH</th>
+						<td onclick="assignDices(this, 'Viererpasch')"></td>
+					</tr>
+
+					<!--Full House-->
+					<tr>
+						<th>FULL HOUSE</th>
+						<td onclick="assignDices(this, 'Full House')"></td>
+					</tr>
+
+					<!--Kleine Straße-->
+					<tr>
+						<th>KLEINE STRAßE</th>
+						<td onclick="assignDices(this, 'Kleine Straße')"></td>
+					</tr>
+
+					<!--Große Straße-->
+					<tr>
+						<th>GROßE STRAßE</th>
+						<td onclick="assignDices(this, 'Große Straße')"></td>
+					</tr>
+
+					<!--Kniffel-->
+					<tr>
+						<th>KNIFFEL</th>
+						<td onclick="assignDices(this, 'Kniffel')"></td>
+					</tr>
+
+					<!--Chance-->
+					<tr>
+						<th>CHANCE</th>
+						<td onclick="assignDices(this, 'Chance')"></td>
+					</tr>
+
+
+
+
+					<!-- Gesamtpunktzahl -->
+					<tr>
+						<th>GESAMMT</th>
+						<td id="score">0</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

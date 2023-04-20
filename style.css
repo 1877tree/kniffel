@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+@media all {
+	/*Algemeine Darstellung*/
+	html, body {
+		font-family: Arial;
+		background-color: #415a77;
+	}
+
+	/*Überschrift Darstellung*/
+	h1 {
+		font-size: 100px;
+		-webkit-text-stroke: 1px black;
+		text-stroke: 4px black;
+		color: mediumpurple;
+		font-family: Impact;
+		text-align: center;
+		margin: auto;
+	}
+
+	/* Spielfeld Zntrieren */
+	.container {
+		width: 50%;
+		text-align: center;
+		margin: auto;
+	}
+
+	/* Darstellung eines Würfels */
+	.dice {
+		width: 50px;
+		height: 50px;
+		margin: 10px;
+		cursor: pointer;
+		display: inline-block;
+		border: 4px white;
+		border-radius: 10px;
+		background-size: contain;
+	}
+
+	/* Würfel mit dem Wert 1 */
+	.dice[value="1"], .dice-two[value="1"]{
+		background-image: url("img/1.png");
+	}
+
+	/* Würfel mit dem Wert 2 */
+	.dice[value="2"], .dice-two[value="2"]{
+		background-image: url("img/2.png");
+	}
+
+	/* Würfel mit dem Wert 3 */
+	.dice[value="3"], .dice-two[value="3"]{
+		background-image: url("img/3.png");
+	}
+
+	/* Würfel mit dem Wert 4 */
+	.dice[value="4"], .dice-two[value="4"]{
+		background-image: url("img/4.png");
+	}
+
+	/* Würfel mit dem Wert 5 */
+	.dice[value="5"], .dice-two[value="5"] {
+		background-image: url("img/5.png");
+	}
+
+	/* Würfel mit dem Wert 6 */
+	.dice[value="6"], .dice-two[value="6"]{
+		background-image: url("img/6.png");
+	}
+
+	/* Würfel Darstellung wenn dieser gehalten wird */
+	.dice[data-hold] {
+		border-color: mediumpurple;
+		opacity: 0.5;
+	}
+
+	/* Mouseover über einen Würfel der Großen Würfelbox*/
+	.dice:hover {
+		box-shadow: 0 0 0px #415a77;
+		transform: scale(1.2);
+	}
+
+	/* Darstellung des Buttons "Würfeln"*/
+	#roll {
+		cursor: pointer;
+		display: block;
+		padding: 10px;
+		margin: 30px auto 0 auto;
+	}
+
+	/* Tabelle darstellung*/
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border: black;
+		border-radius: 20px;
+		background-color: white;
+		margin-top: 40px;
+	}
+	/*die insgesammte Box (Tabelle, Button, Große Würfel*/
+	.containerzwei{
+		text-align: center;
+		margin: auto;
+	}
+
+	/*Die kleinen Würfel*/
+	.dice-two{
+		width: 35px;
+		height: 35px;
+		margin: 0 auto 17px auto;
+		cursor: pointer;
+		display: inline-block;
+		border: 4px white;
+		border-radius: 10px;
+		background-size: contain;
+	}
+
+	/*Die kleinen Würfel, Animationen*/
+	.dice-two:hover {
+		color: white;
+	}
+
+	/*Tabellenraster*/
+	table, th, td {
+		border: 1px solid #415a77;
+	}
+
+	/*Tabellenraster größe und so*/
+	th, td {
+		width: 50%;
+		padding: 10px;
+	}
+
+	/* Felder bei einem Mouseover hervorheben */
+	td:not(#score) {
+		cursor: pointer;
+	}
+}
