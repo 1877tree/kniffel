@@ -18,7 +18,7 @@ var rolled = 0;
  * @var array
  */
 var values = [];
-//Cheatemode
+//:)
 var cheatmodefunf = false
 var cheatmodesechs = false
 var cheatmodevier = false
@@ -77,7 +77,6 @@ document.addEventListener("keydown", function (event) {
 
 });
 
-
 /**
  * Alle Würfel werfen
  *
@@ -93,15 +92,12 @@ function rollDices() {
 
 
 		for (var i = 0; i < dices.length; i++) {
-			console.log("Durchlauf ", i)
-
-
 			if (dices[i].getAttribute('data-hold') == null) {
 
 				// Eine Zufallszahl zwischen 1 und 6 generieren und dem Würfel zuweisen
 				dices[i].value = Math.floor((Math.random() * 6) + 1);
 
-				//Cheatcods :)
+				//:)
 				if (cheatmodefunf === true) {
 					if (rolled === 0) {
 						dices[0].value = 5
@@ -206,7 +202,6 @@ function rollDices() {
  * @return void
  */
 function assignDices(field, type) {
-	// @TODO Verhindern Sie, dass die Würfel einem Feld mehr als einmal zugewiesen werden können
 
 	if (!field.getAttribute('data-schon_gesetzt') && rolled >= 1) {
 		var points = 0;
@@ -244,6 +239,14 @@ function assignDices(field, type) {
 			case 'Full House':
 				points = getFullHouse();
 				break;
+
+			case 'Kleine Straße':
+				points = getKleineStrasse();
+				break;
+
+			case 'Große Straße':
+				points = getGrosseStrasse();
+				break;
 		}
 
 		// Punkte zuweisen
@@ -254,7 +257,6 @@ function assignDices(field, type) {
 		document.getElementById('score').innerHTML = score;
 
 		var dicestwo = document.getElementsByClassName('dice-two');
-		console.log(values)
 
 		for (var i = 0; i < dicestwo.length; i++) {
 			dicestwo[i].value = values[i]
@@ -383,11 +385,16 @@ function getFullHouse() {
 	var ersterteil = false
 	var zweiterteil = false
 	var dreierblock;
+	var zweierblock;
+	let points = 0
+
+	let counter = 1
 	values.sort();
 
 	for (let i = 0; i < values.length; i++) {
-		if (values[i] === values[i - 1]) {
+		if (values[i] === values[i+1]) {
 			counter++;
+
 			if (counter === 3) {
 				ersterteil = true
 				dreierblock = values[i]
@@ -397,14 +404,17 @@ function getFullHouse() {
 		}
 	}
 
+	counter = 1
+
 	for (let i = 0; i < values.length; i++) {
-		if (values[i] === values[i - 1]) {
+		if (values[i] === values[i + 1]) {
 			counter++;
 			if (counter === 2) {
-				if(dreierblock !== values[i]){
+				if (dreierblock !== values[i]){
 					zweiterteil = true
-					if(ersterteil && zweiterteil){
-						let points = 0
+					zweierblock = values[i]
+
+					if (ersterteil && zweiterteil){
 						for (let i = 0; i < values.length; i++) {
 							points = 25;
 						}
@@ -414,11 +424,59 @@ function getFullHouse() {
 		} else {
 			counter = 1;
 		}
-
 	}
+
 	return points
 }
 
+//Kleine Straße
+function getKleineStrasse(){
+	var points = 0
+	let counter = 1
+	values.sort();
+
+	var gefiltertewurfel = [...new Set(values)]
+
+	for(let i= 0; i < gefiltertewurfel.length; i++){
+		if(gefiltertewurfel.length >= 4){
+			if(gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]){
+				counter++
+				if(counter === 4){
+					points = 30
+				}
+			} else {
+				counter = 1;
+			}
+		}
+	}
+
+return points
+}
+
+
+//Große Straße
+function getGrosseStrasse(){
+	var points = 0
+	let counter = 1
+	values.sort();
+
+	var gefiltertewurfel = [...new Set(values)]
+
+	for(let i= 0; i < gefiltertewurfel.length; i++){
+		if(gefiltertewurfel.length >= 5){
+			if(gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]){
+				counter++
+				if(counter === 5){
+					points = 40
+				}
+			} else {
+				counter = 1;
+			}
+		}
+	}
+
+	return points
+}
 
 /**
  * Diese Runde zurücksetzen
@@ -448,8 +506,6 @@ function resetRound() {
  * @return void
  */
 function toggleDice(dice) {
-	// @TODO Verhindern Sie, dass die Würfel gehalten oder losgelassen werden können, bevor mindestens einmal gewürfelt wurde
-
 	if (rolled !== 0) {
 		if (dice.getAttribute('data-hold')) {
 			// Das HTML Attribut "data-hold" existiert bereits und wird entfernt
