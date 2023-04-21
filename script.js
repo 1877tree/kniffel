@@ -1,80 +1,42 @@
-/**
- * Gesamtpunktzahl
- *
- * @var number
- */
-var score = 0;
+// Gesamtpunktzahl
+let score = 0;
 
-/**
- * Anzahl der getätigten Würfe in dieser Runde
- *
- * @var number
- */
-var rolled = 0;
+// Anzahl der getätigten Würfe in dieser Runde
+let rolled = 0;
 
-/**
- * Alle aktuellen Würfelwerte
- *
- * @var array
- */
-var values = [];
-//:)
-var cheatmodefunf = false
-var cheatmodesechs = false
-var cheatmodevier = false
-var cheatmodedrei = false
-var cheatmodezwei = false
-var cheatmodeeins = false
+//Alle aktuellen Würfelwerte
+let values = [];
+let cheatmodefunf = false
+let cheatmodesechs = false
+let cheatmodevier = false
+let cheatmodedrei = false
+let cheatmodezwei = false
+let cheatmodeeins = false
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event) => {
 	if (event.keyCode === 32) {
-		if (cheatmodefunf === true) {
-			cheatmodefunf = false
-		} else {
-			cheatmodefunf = true
-		}
-
+		cheatmodefunf = !cheatmodefunf
 	}
+
 	if (event.keyCode === 67) {
-		if (cheatmodesechs === true) {
-			cheatmodesechs = false
-		} else {
-			cheatmodesechs = true
-		}
+		cheatmodesechs = !cheatmodesechs
 	}
 
 	if (event.keyCode === 86) {
-		if (cheatmodevier === true) {
-			cheatmodevier = false
-		} else {
-			cheatmodevier = true
-		}
+		cheatmodevier = !cheatmodevier;
 	}
 
 	if (event.keyCode === 66) {
-		if (cheatmodedrei === true) {
-			cheatmodedrei = false
-		} else {
-			cheatmodedrei = true
-		}
+		cheatmodedrei = !cheatmodedrei
 	}
 
 	if (event.keyCode === 78) {
-		if (cheatmodezwei === true) {
-			cheatmodezwei = false
-		} else {
-			cheatmodezwei = true
-		}
+		cheatmodezwei = !cheatmodezwei
 	}
 
 	if (event.keyCode === 77) {
-		if (cheatmodeeins === true) {
-			cheatmodeeins = false
-		} else {
-			cheatmodeeins = true
-		}
+		cheatmodeeins = !cheatmodeeins
 	}
-
 });
 
 /**
@@ -83,109 +45,115 @@ document.addEventListener("keydown", function (event) {
  * @return void
  */
 function rollDices() {
-
 	if (rolled !== 3) {
 		// Alle HTML Elemente mit der CSS Klasse "dice" ermitteln
-		var dices = document.getElementsByClassName('dice');
+		let dices = document.getElementsByClassName('dice')
+
 		// Die aktuellen Würfelwerte zurücksetzen
 		values = [];
 
-
-		for (var i = 0; i < dices.length; i++) {
+		for (let i = 0; i < dices.length; i++) {
 			if (dices[i].getAttribute('data-hold') == null) {
-
 				// Eine Zufallszahl zwischen 1 und 6 generieren und dem Würfel zuweisen
 				dices[i].value = Math.floor((Math.random() * 6) + 1);
 
 				//:)
-				if (cheatmodefunf === true) {
+				if (cheatmodefunf) {
 					if (rolled === 0) {
 						dices[0].value = 5
 						dices[2].value = 5
 					}
+
 					if (rolled === 1) {
 						dices[3].value = 5
 						dices[4].value = 5
 					}
+
 					if (rolled === 2) {
 						dices[1].value = 5
 					}
-
 				}
 
-				if (cheatmodesechs === true) {
+				if (cheatmodesechs) {
 					if (rolled === 0) {
 						dices[2].value = 6
 						dices[4].value = 6
 					}
+
 					if (rolled === 1) {
 						dices[1].value = 6
 					}
+
 					if (rolled === 2) {
 						dices[0].value = 6
 						dices[3].value = 6
 					}
 				}
 
-				if (cheatmodevier === true) {
+				if (cheatmodevier) {
 					if (rolled === 0) {
 						dices[0].value = 4
 						dices[1].value = 4
 					}
+
 					if (rolled === 1) {
 						dices[3].value = 4
 					}
+
 					if (rolled === 2) {
 						dices[2].value = 4
 						dices[4].value = 4
 					}
 				}
 
-				if (cheatmodedrei === true) {
+				if (cheatmodedrei) {
 					if (rolled === 0) {
 						dices[4].value = 3
 						dices[3].value = 3
 						dices[1].value = 3
 					}
+
 					if (rolled === 2) {
 						dices[0].value = 3
 						dices[2].value = 3
 					}
 				}
 
-				if (cheatmodezwei === true) {
+				if (cheatmodezwei) {
 					if (rolled === 0) {
 						dices[0].value = 2
 						dices[4].value = 2
 						dices[3].value = 2
 						dices[1].value = 2
 					}
+
 					if (rolled === 1) {
 					}
-					if (rolled === 2) {
 
+					if (rolled === 2) {
 						dices[2].value = 2
 					}
 				}
 
-				if (cheatmodeeins === true) {
+				if (cheatmodeeins) {
 					if (rolled === 0) {
 						dices[4].value = 1
 						dices[3].value = 1
 					}
+
 					if (rolled === 1) {
 						dices[1].value = 1
 					}
+
 					if (rolled === 2) {
 						dices[0].value = 1
 						dices[2].value = 1
 					}
 				}
-
 			}
+
 			// Aktuellen Würfelwert merken
-			var value = parseInt(dices[i].value);
-			values.push(value);
+			values.push(parseInt(dices[i].value));
 		}
 
 		// Anzahl der getätigten Würfe erhöhen
@@ -197,12 +165,10 @@ function rollDices() {
 /**
  * Würfel einem Feld zuweisen
  *
- * @param HTMLElement field
- * @param mixed type
- * @return void
+ * @param field
+ * @param type
  */
 function assignDices(field, type) {
-
 	if (!field.getAttribute('data-schon_gesetzt') && rolled >= 1) {
 		var points = 0;
 
@@ -256,35 +222,28 @@ function assignDices(field, type) {
 		score += points;
 		document.getElementById('score').innerHTML = score;
 
-		var dicestwo = document.getElementsByClassName('dice-two');
+		const dicestwo = document.getElementsByClassName('dice-two');
 
 		for (var i = 0; i < dicestwo.length; i++) {
 			dicestwo[i].value = values[i]
 		}
 
-
 		// Runde zurücksetzen
 		resetRound();
 	}
-
-
-	// Die zu vergebenden Punkte
-
 }
 
 /**
  * Einser bis Sechser berechnen
  *
- * @param number num
- * @return number
+ * @param num
+ * @returns {number}
  */
 function getEinserBisSechser(num) {
-	var points = 0;
+	let points = 0;
 
 	for (var i = 0; i < values.length; i++) {
-		if (values[i] === num) {
-			points += num;
-		}
+		points += values[i] === num ? num : 0
 	}
 
 	return points;
@@ -292,30 +251,27 @@ function getEinserBisSechser(num) {
 
 /**
  * Pasch berechnen
- *
- * @param number num
- * @return number
+ * @param num
+ * @returns {number}
  */
 function getPasch(num) {
-	var points = 0;
+	let i;
+	let points = 0;
 
 	values.sort();
 
 	let counter = 1;
-
 	let istDreierPasch = false
 	let istViererPasch = false
 	let istKniffel = false
-	let istFullHouse = false
 
 	//Dreier Pasch
 	if (3 === num) {
 		for (let i = 0; i < values.length; i++) {
 			if (values[i] === values[i - 1]) {
 				counter++;
-				if (counter === 3) {
-					istDreierPasch = true
-				}
+
+				istDreierPasch = counter === 3
 			} else {
 				counter = 1;
 			}
@@ -323,7 +279,7 @@ function getPasch(num) {
 	}
 
 	if (istDreierPasch) {
-		for (var i = 0; i < values.length; i++) {
+		for (i = 0; i < values.length; i++) {
 			points += values[i];
 		}
 	}
@@ -333,9 +289,8 @@ function getPasch(num) {
 		for (let i = 0; i < values.length; i++) {
 			if (values[i] === values[i - 1]) {
 				counter++;
-				if (counter === 4) {
-					istViererPasch = true
-				}
+
+				istViererPasch = counter === 4
 			} else {
 				counter = 1;
 			}
@@ -343,7 +298,7 @@ function getPasch(num) {
 
 
 	if (istViererPasch) {
-		for (var i = 0; i < values.length; i++) {
+		for (i = 0; i < values.length; i++) {
 			points += values[i];
 		}
 	}
@@ -353,17 +308,15 @@ function getPasch(num) {
 		for (let i = 0; i < values.length; i++) {
 			if (values[i] === values[i - 1]) {
 				counter++;
-				if (counter === 5) {
-					istKniffel = true
-				}
+
+				istKniffel = counter === 5;
 			} else {
 				counter = 1;
 			}
 		}
 
-
 	if (istKniffel) {
-		for (var i = 0; i < values.length; i++) {
+		for (i = 0; i < values.length; i++) {
 			points = 50;
 		}
 	}
@@ -374,9 +327,11 @@ function getPasch(num) {
 //Chance
 function getChance() {
 	let points = 0
+
 	for (let i = 0; i < values.length; i++) {
-		points += values[i];
+		points += values[i]
 	}
+
 	return points
 }
 
@@ -384,11 +339,11 @@ function getChance() {
 function getFullHouse() {
 	var ersterteil = false
 	var zweiterteil = false
-	var dreierblock;
-	var zweierblock;
+	var dreierblock
+	var zweierblock
 	let points = 0
-
 	let counter = 1
+
 	values.sort();
 
 	for (let i = 0; i < values.length; i++) {
@@ -435,13 +390,13 @@ function getKleineStrasse(){
 	let counter = 1
 	values.sort();
 
-	var gefiltertewurfel = [...new Set(values)]
+	const gefiltertewurfel = [...new Set(values)];
 
-	for(let i= 0; i < gefiltertewurfel.length; i++){
-		if(gefiltertewurfel.length >= 4){
-			if(gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]){
+	for (let i= 0; i < gefiltertewurfel.length; i++) {
+		if (gefiltertewurfel.length >= 4) {
+			if (gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]) {
 				counter++
-				if(counter === 4){
+				if (counter === 4) {
 					points = 30
 				}
 			} else {
@@ -450,23 +405,22 @@ function getKleineStrasse(){
 		}
 	}
 
-return points
+	return points
 }
-
 
 //Große Straße
 function getGrosseStrasse(){
-	var points = 0
+	let points = 0;
 	let counter = 1
 	values.sort();
 
-	var gefiltertewurfel = [...new Set(values)]
+	const gefiltertewurfel = [...new Set(values)];
 
-	for(let i= 0; i < gefiltertewurfel.length; i++){
-		if(gefiltertewurfel.length >= 5){
-			if(gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]){
+	for (let i= 0; i < gefiltertewurfel.length; i++) {
+		if (gefiltertewurfel.length >= 5) {
+			if (gefiltertewurfel[i] + 1 === gefiltertewurfel[i + 1]) {
 				counter++
-				if(counter === 5){
+				if (counter === 5) {
 					points = 40
 				}
 			} else {
@@ -484,9 +438,9 @@ function getGrosseStrasse(){
  * @return void
  */
 function resetRound() {
-	var dices = document.getElementsByClassName('dice');
+	const dices = document.getElementsByClassName('dice');
 
-	for (var i = 0; i < dices.length; i++) {
+	for (let i = 0; i < dices.length; i++) {
 		// Alle Würfel loslassen
 		dices[i].removeAttribute('data-hold');
 
@@ -496,29 +450,18 @@ function resetRound() {
 
 	// Alle gemerkten Würfelwerte zurücksetzen
 	values = [];
-
 }
 
 /**
  * Würfel halten oder loslassen
  *
- * @param HTMLElement dice
- * @return void
+ * @param dice
  */
 function toggleDice(dice) {
 	if (rolled !== 0) {
-		if (dice.getAttribute('data-hold')) {
-			// Das HTML Attribut "data-hold" existiert bereits und wird entfernt
-			dice.removeAttribute('data-hold');
-		} else {
-			// Das HTML Attribut "data-hold" existiert noch nicht und wird gesetzt
-			dice.setAttribute('data-hold', 1);
-		}
+		dice.getAttribute('data-hold') ? dice.removeAttribute('data-hold') : dice.setAttribute('data-hold', 1)
 
 		// Fokus auf diesen Würfel entfernen
 		dice.blur();
 	}
-
-
 }
-
